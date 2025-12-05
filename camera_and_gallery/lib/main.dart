@@ -1,4 +1,4 @@
-import 'package:camera_and_gallery/pages/homepage.dart';
+import 'package:camera_and_gallery/src/features/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashPage());
   }
 }

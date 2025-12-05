@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:camera_and_gallery/src/presentation/pages/homepage.dart';
 import 'package:flutter/material.dart';
+import 'homepage.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

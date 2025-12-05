@@ -1,5 +1,6 @@
+
 import 'dart:io';
-import 'package:camera_and_gallery/src/presentation/pages/photo_view.dart';
+import 'package:camera_and_gallery/src/features/presentation/pages/photo_view.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -165,7 +166,8 @@ class _HomePageState extends State<HomePage> {
           showDialog(
             context: context,
             builder: (context) {
-              return _actionButtonCollection();
+              return _actionButtonCollection(
+              );
             },
           );
           setState(() {});
