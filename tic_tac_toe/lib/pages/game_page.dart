@@ -20,7 +20,7 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
   }
 
   checkWinner(){
-    
+    if(boardData[0]==boardData[1]){}
   }
   @override
   Widget build(BuildContext context) {
