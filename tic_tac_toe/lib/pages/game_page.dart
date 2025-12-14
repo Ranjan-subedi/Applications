@@ -18,6 +18,10 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
       lastValue = "X";
     }
   }
+
+  checkWinner(){
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
