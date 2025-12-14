@@ -40,8 +40,15 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
       }
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkWinner(); 
+     }
 
-  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
