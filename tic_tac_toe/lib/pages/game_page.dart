@@ -19,9 +19,29 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
     }
   }
 
+// Check Winner
   checkWinner(){
-    if(boardData[0]==boardData[1]){}
+    if(boardData[0]==boardData[1] && boardData[1]==boardData[2]){
+      print("Winner is $lastValue");
+    }else if(boardData[3]==boardData[4] && boardData[4]==boardData[5]){
+      print("Winner is $lastValue");
+    }else if(boardData[6]==boardData[7]&& boardData[7]==boardData[]){
+      print("Winner is $lastValue");
+    }else if(boardData[0]==boardData[3] && boardData[3]==boardData[6]){
+      print("Winner is $lastValue");
+    }else if(boardData[1]==boardData[4] && boardData[4]==boardData[7]){
+      print("Winner is $lastValue");
+    }else if(boardData[2]==boardData[5] && boardData[5]==boardData[8]){
+      print("Winner is $lastValue");
+      }else if(boardData[0]==boardData[4] && boardData[4]==boardData[8]){
+      print("Winner is $lastValue");
+      }else if(boardData[2]==boardData[4] && boardData[4]==boardData[6]){
+      print("Winner is $lastValue");
+      }
   }
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
