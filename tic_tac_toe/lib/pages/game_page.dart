@@ -10,6 +10,13 @@ class Tic_Tac_Toe extends StatefulWidget {
 class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
   String lastValue = "X";
   List boardData = ["", "", "", "", "", "", "", "", ""];
+  String winner = "";
+  bool gameOver = false;
+  int xScore = 0;
+  int oScore = 0;
+
+// Change Value
+
 
   changeValue(){
     if(lastValue == "X"){
@@ -19,33 +26,76 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
     }
   }
 
+who_win(ab){
+  if(ab=="X"){
+    xScore++;
+  }else{
+    oScore++;
+  }
+}
+
+
 // Check Winner
   checkWinner(){
-    if(boardData[0]==boardData[1] && boardData[1]==boardData[2]){
-      print("Winner is $lastValue");
-    }else if(boardData[3]==boardData[4] && boardData[4]==boardData[5]){
-      print("Winner is $lastValue");
-    }else if(boardData[6]==boardData[7]&& boardData[7]==boardData[]){
-      print("Winner is $lastValue");
-    }else if(boardData[0]==boardData[3] && boardData[3]==boardData[6]){
-      print("Winner is $lastValue");
-    }else if(boardData[1]==boardData[4] && boardData[4]==boardData[7]){
-      print("Winner is $lastValue");
-    }else if(boardData[2]==boardData[5] && boardData[5]==boardData[8]){
-      print("Winner is $lastValue");
-      }else if(boardData[0]==boardData[4] && boardData[4]==boardData[8]){
-      print("Winner is $lastValue");
-      }else if(boardData[2]==boardData[4] && boardData[4]==boardData[6]){
-      print("Winner is $lastValue");
+    if(boardData[0] != "" &&boardData[0]==boardData[1] && boardData[1]==boardData[2]){
+      debugPrint("Winner is ${boardData[0]}");
+      setState(() {
+        winner = boardData[0];
+        gameOver = true;
+        who_win(winner);
+      });
+    }else if(boardData[3] != "" && boardData[3]==boardData[4] && boardData[4]==boardData[5]){
+      debugPrint("Winner is ${boardData[3]}");
+      setState(() {
+        winner = boardData[3];
+        gameOver = true;
+        who_win(winner);
+      });
+    }else if(boardData[6] != "" && boardData[6]==boardData[7]&& boardData[7]==boardData[8]){
+      debugPrint("Winner is ${boardData[6]}");
+      setState(() {
+        winner = boardData[6];
+        gameOver = true;
+        who_win(winner);
+      });
+    }else if(boardData[0] != "" && boardData[0]==boardData[3] && boardData[3]==boardData[6]){
+      debugPrint("Winner is ${boardData[0]}");
+      setState(() {
+        winner = boardData[0];
+        gameOver = true;
+        who_win(winner);
+      });
+    }else if(boardData[1] != "" && boardData[1]==boardData[4] && boardData[4]==boardData[7]){
+      debugPrint("Winner is ${boardData[1]}");
+    setState(() {
+    winner = boardData[1];
+    gameOver = true;
+    who_win(winner);
+    });
+    }else if(boardData[2] != "" && boardData[2]==boardData[5] && boardData[5]==boardData[8]){
+      debugPrint("Winner is ${boardData[2]}");
+      setState(() {
+        winner = boardData[2];
+        gameOver = true;
+        who_win(winner);
+      });
+      }else if(boardData[0] != "" && boardData[0]==boardData[4] && boardData[4]==boardData[8]){
+      debugPrint("Winner is ${boardData[0]}");
+      setState(() {
+        winner = boardData[0];
+        gameOver = true;
+        who_win(winner);
+      });
+      }else if(boardData[2] != "" && boardData[2]==boardData[4] && boardData[4]==boardData[6]){
+      debugPrint("Winner is ${boardData[2]}");
+      setState(() {
+        winner = boardData[2];
+        gameOver = true;
+        who_win(winner);
+      });
       }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    checkWinner(); 
-     }
 
 
 
@@ -66,7 +116,7 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: 430,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -77,12 +127,12 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      if(boardData[index] == ""){
+                      if(boardData[index] == "" && gameOver == false){
                         boardData[index] = lastValue;
                         changeValue();
                         setState(() {
-
                         });
+                        checkWinner();
                       }
 
                     },
@@ -107,26 +157,67 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
           SizedBox(
             height: 20,
           ),
-          Text("Winner",style: TextStyle(
-            fontSize: 18,color: Color(0xFF00FFA3),
-          )),
+
+
+         // Reset button
+         IconButton(onPressed: () {
+           setState(() {
+             boardData = List.filled(9, "");
+             gameOver = false;
+           });
+         }, icon: Icon(Icons.refresh,color: Color(0xFFFFFFFF),size: 40,)),
+
+
+
+          SizedBox(
+            height: 10,
+          ),
+
+          SizedBox(height: 30,),
+          Text(
+            winner == "" ? "No Winner Yet" : "Winner is $winner",
+            style: TextStyle(
+              fontSize: 20,
+              color: Color(0xFF00FFA3),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 30,),
+          // Text("Winner",style: TextStyle(
+          //   fontSize: 18,color: Color(0xFF00FFA3),
+          // )),
           Container(
             color: Colors.white24,
-            height: 40,
+            // height: 40,
             width: MediaQuery.of(context).size.width*0.8,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
               children: [
-                Text("O 1",style: TextStyle(
-                  fontSize: 18,color: Color(0xFF00FFA3),
-                ),),
-                Text("X 1",style: TextStyle(
-                  fontSize: 18,color: Color(0xFFFF005C),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("X Score",style: TextStyle(
+                      fontSize: 18,color: Color(0xFF00FFA3),
+                    ),),
+                    Text("O Score",style: TextStyle(
+                      fontSize: 18,color: Color(0xFFFF005C),
+                    ),),
+                  ],
+                ),
+                Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(xScore.toString(),style: TextStyle(
+                      fontSize: 18,color: Color(0xFF00FFA3),
+                    ),),
 
-                ),)
-
-
+                    Text(oScore.toString(),style: TextStyle(
+                      fontSize: 18,color: Color(0xFFFF005C),
+                    ),),
+                  ],
+                ),
               ],
             ),
           )
