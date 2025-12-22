@@ -54,7 +54,7 @@ splashfunction()async {
             ]),
           ),
 
-          Text("\@ copyight clam to Ranjan Subedi"),
+          Text("\@ copyright clam to Ranjan Subedi"),
         ],
       ),
     );

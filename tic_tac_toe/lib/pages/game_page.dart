@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tic_tac_toe/database.dart';
 
 class Tic_Tac_Toe extends StatefulWidget {
   const Tic_Tac_Toe({super.key});
@@ -15,15 +17,18 @@ class _Tic_Tac_ToeState extends State<Tic_Tac_Toe> {
   int xScore = 0;
   int oScore = 0;
 
+  StorageService gameStorage  = StorageService();
+
 // Change Value
 
 
-  changeValue(){
+  changeValue()async{
     if(lastValue == "X"){
       lastValue = "O";
     }else{
       lastValue = "X";
     }
+    await gameStorage.saveScores(xScore, oScore);
   }
 
 who_win(ab){
@@ -96,8 +101,20 @@ who_win(ab){
       }
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadStoredScores();
+  }
 
-
+  Future<void> loadStoredScores() async {
+    final scores = await gameStorage.loadScores();
+    setState(() {
+      xScore = scores['xScore']!;
+      oScore = scores['oScore']!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,11 +177,19 @@ who_win(ab){
 
 
          // Reset button
-         IconButton(onPressed: () {
+         IconButton(onPressed: () async{
+           await gameStorage.resetScores();
+           setState(() {
+             xScore = 0;
+             oScore = 0;
+           });
            setState(() {
              boardData = List.filled(9, "");
              gameOver = false;
+
            });
+
+
          }, icon: Icon(Icons.refresh,color: Color(0xFFFFFFFF),size: 40,)),
 
 
